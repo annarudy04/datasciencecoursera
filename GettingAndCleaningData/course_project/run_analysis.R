@@ -58,7 +58,7 @@ get_long_mean_summary <- function(){
     names_to="measure", 
     values_to="value"
   )
-  # Group the long data by combinaitons of subject, activity, and measure
+  # Group the long data by combinations of subject, activity, and measure
   grp_longer <- group_by(longer_data, subject, activity, measure)
   # Get the mean for each group
   mean_summary_long <- summarize(grp_longer, mean_value=mean(value))
@@ -76,7 +76,7 @@ get_wide_mean_summary <-function(){
     names_from=measure, 
     values_from=mean_value
   )
-  # Note, instead of getting the long summary and widdening, 
+  # Note, instead of getting the long summary and widening, 
   # you could have used:
   # mean_summary_wide <- aggregate(. ~subject + activity, mean_and_std_data, mean)
   # or:
