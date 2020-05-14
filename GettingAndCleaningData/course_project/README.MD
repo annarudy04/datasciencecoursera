@@ -28,7 +28,7 @@ After sourcing the script, the function is ready for use. To see the tibble's co
 The functions `get_long_mean_summary()` and `get_wide_mean_summary()` both achieve the fifth and final requirement of the script. They: 
 5. Create a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-Both return tibbles with same data, but in different formats. If you wish to have the data returned in long format in which each row contains a subject, an activity, one measurement, and the mean for that measurement, use `get_long_mean_summary()`. If you wish to have the data format, in which each row contains a subject, an activity, and means for all measurements, use `get_wide_mean_summary()`. The column descriptions for both tibbles can be found in the [codebook] (codebook.MD). 
+Both return tibbles with same data, but in different formats. If you wish to have the data returned in long format in which each row contains a subject, an activity, one measurement, and the mean for that measurement, use `get_long_mean_summary()`. If you wish to have the data returned in wide format, in which each row contains a subject, an activity, and means for all measurements, use `get_wide_mean_summary()`. The column descriptions for both tibbles can be found in the [codebook] (codebook.MD). 
 
 After sourcing the script, the functions are ready for use. To see the tibbles' contents, use: 
 
