@@ -1,13 +1,13 @@
 ## Course Project Code Book
 
 ### Background
-The datasets produced in this repo utilize the [UCI HAR DATASET](UCI HAR DATASET). The README for this dataset can be found [here](UCI HAR DATASET/README.txt), and the codebook for the dataset, which explains the variables can be found [here](UCI HAR DATASET/features_info.txt). 
+The datasets produced in this project utilize the UCI HAR Dataset, which contains data on Samsung accelerometer data. The orignal README and Codebook for the Data can be found in the `UCI HAR Dataset` directory. 
 
 ### Variables returned by get_mean_and_std_data():
 Once the get_mean_and_std_data() function is run (see the [README](README.MD) for more info), a tibble is returned with the following columns:
 * subject: A code from 1 to 30 identifing the subject who performed the activity for each window sample.
 * activity: The activity the subject performed (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING)
-* aggregated measurements: The follwing 79 columns are aggregations of the measurements described in the  [UCI HAR Dataset codebook](UCI HAR DATASET/features_info.txt). While the original data contains several aggregates for each measurement, get_mean_and_std_data() extracts only mean and standard deviation aggregates. 
+* aggregated measurements: The follwing 79 columns are aggregations of the measurements described in  `UCI HAR DATASET/features_info.txt`. While the original data contains several aggregates for each measurement, get_mean_and_std_data() extracts only mean and standard deviation aggregates. 
 
 ### Variables returned by get_long_mean_summary():
 Once the get_long_mean_summary() funciton is run  (see the [README](README.MD) for more info), a tibble is returned with the following columns: 
