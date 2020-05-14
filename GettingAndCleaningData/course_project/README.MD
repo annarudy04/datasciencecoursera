@@ -1,7 +1,7 @@
 ## Getting and Cleaning Data Course Project
 
 ### Background
-The datasets produced in this repo utilize the [UCI HAR DATASET](UCI HAR DATASET) on Samsung accelerometer data. The README for this dataset can be found [here](UCI HAR DATASET/README.txt), and the codebook for the dataset, which explains the variables can be found [here](UCI HAR DATASET/features_info.txt). 
+The datasets produced in this repo utilize the [UCI HAR DATASET]("UCI HAR DATASET") on Samsung accelerometer data. The README for this dataset can be found [here]("UCI HAR DATASET/README.txt"), and the codebook for the dataset, which explains the variables can be found [here](UCI HAR DATASET/features_info.txt). 
 
 ### Requirements
 Usage of the script contained in this project will require installation of the following libraries: 
