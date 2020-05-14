@@ -76,6 +76,14 @@ get_wide_mean_summary <-function(){
     names_from=measure, 
     values_from=mean_value
   )
+  # Note, instead of getting the long summary and widdening, 
+  # you could have used:
+  # mean_summary_wide <- aggregate(. ~subject + activity, mean_and_std_data, mean)
+  # or:
+  # mean_summary_wide <- mean_and_std_data %>%
+  #       group_by(subject, activity) %>% 
+  #       summarize_all(mean)
+  
   # Add the prefix "_mean" to each measurement column
   names(mean_summary_wide)[numeric_cols] = paste0(
     "mean_", 
