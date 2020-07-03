@@ -1,3 +1,6 @@
+library(dplyr)
+library(ggplot2)
+
 # Download and read air pollution data. 
 fileUrl <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2FNEI_data.zip"
 zipfileName <- "exdata_data_NEI_data.zip"
@@ -14,21 +17,19 @@ if(!exists("SCC")){
   SCC <- readRDS("exdata_data_NEI_data/Source_Classification_Code.rds")
 }
 
-# Plot total yearly emissions in Baltimore (fips = "24510")
-png("plot2.png", width = 480, height = 480, units = "px")
-bmd_yearly_totals <- NEI %>%
-  filter(fips == "24510") %>%
+# Plot total yearly emissions in Baltimore (fips = "24510") from vehicle sources. 
+sector_emissions <- left_join(NEI, select(SCC, SCC, EI.Sector), by = c("SCC"))
+bmd_yearly_vehicle_totals <- sector_emissions %>%
+  filter(fips == "24510" & grepl("Vehicle", EI.Sector)) %>%
   group_by(year) %>%
   summarize(total = sum(Emissions))
-with(
-  bmd_yearly_totals,
-  plot(
-    year, 
-    total, 
-    main = "Baltimore County Yearly Emissions", 
-    ylab = "Total Emissions (Tons)", 
-    xlab = "Year", 
-    type = "b"
-  )
+qplot(
+  year, 
+  total, 
+  data=bmd_yearly_vehicle_totals, 
+  geom = "line", 
+  main = "Baltimore County Yearly Emissions from Vehicles", 
+  xlab = "Year", 
+  ylab = "Total Emissions (tons)"
 )
-dev.off()
+ggsave("plot_files/plot5.png", width = 6, height = 4)

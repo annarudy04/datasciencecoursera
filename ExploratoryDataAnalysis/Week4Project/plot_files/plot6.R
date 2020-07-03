@@ -1,3 +1,6 @@
+library(dplyr)
+library(ggplot2)
+
 # Download and read air pollution data. 
 fileUrl <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2FNEI_data.zip"
 zipfileName <- "exdata_data_NEI_data.zip"
@@ -14,19 +17,17 @@ if(!exists("SCC")){
   SCC <- readRDS("exdata_data_NEI_data/Source_Classification_Code.rds")
 }
 
-# Plot total yearly emissions in Baltimore (fips = "24510") from vehicle sources. 
+# Plot total yearly emissions in Baltimore (fips = "24510") and LA (fips = "06037")
+# from vehicle sources. 
 sector_emissions <- left_join(NEI, select(SCC, SCC, EI.Sector), by = c("SCC"))
-bmd_yearly_vehicle_totals <- sector_emissions %>%
-  filter(fips == "24510" & grepl("Vehicle", EI.Sector)) %>%
-  group_by(year) %>%
+bmd_la_yearly_vehicle_totals <- sector_emissions %>%
+  filter(fips %in% c("24510", "06037") & grepl("Vehicle", EI.Sector)) %>%
+  group_by(year, fips) %>%
   summarize(total = sum(Emissions))
-qplot(
-  year, 
-  total, 
-  data=bmd_yearly_vehicle_totals, 
-  geom = "line", 
-  main = "Baltimore County Yearly Emissions from Vehicles", 
-  xlab = "Year", 
-  ylab = "Total Emissions (tons)"
-)
-ggsave("plot5.png", width = 6, height = 4)
+g <- ggplot(bmd_la_yearly_vehicle_totals, aes(year, total, group = fips))
+g + geom_line(aes(col = fips)) + 
+  scale_color_discrete(name = "County", labels = c("Los Angeles", "Baltimore")) + 
+  xlab("Year") +
+  ylab("Total Emissions (tons)") + 
+  ggtitle("Yearly Emissions from Vehicles")
+ggsave("plot_files/plot6.png", width = 6, height = 4)

@@ -1,3 +1,6 @@
+library(dplyr)
+library(ggplot2)
+
 # Download and read air pollution data. 
 fileUrl <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2FNEI_data.zip"
 zipfileName <- "exdata_data_NEI_data.zip"
@@ -14,20 +17,19 @@ if(!exists("SCC")){
   SCC <- readRDS("exdata_data_NEI_data/Source_Classification_Code.rds")
 }
 
-# Plot total yearly emissions. 
-png("plot1.png", width = 480, height = 480, units = "px")
-yearly_totals <- NEI %>%
+# Plot yearly emissions from coal sources. 
+sector_emissions <- left_join(NEI, select(SCC, SCC, EI.Sector), by = c("SCC"))
+coal_yearly_emissions <- sector_emissions %>%
+  filter(grepl("Coal", EI.Sector)) %>%
   group_by(year) %>%
   summarize(total = sum(Emissions))
-with(
-  yearly_totals, 
-  plot(
-    year, 
-    total, 
-    main = "Yearly Emissions",
-    ylab = "Total Emissions (Tons)",
-    xlab = "Year", 
-    type = "b"
-  )
+qplot(
+  year, 
+  total, 
+  data=coal_yearly_emissions, 
+  geom = "line", 
+  main = "Yearly Emissions from Coal", 
+  xlab = "Year", 
+  ylab = "Total Emissions (tons)"
 )
-dev.off()
+ggsave("plot_files/plot4.png", width = 6, height = 4)
