@@ -8,4 +8,4 @@ The main prompt states to address the following questions as part of your analys
 2. Across the United States, which types of events have the greatest economic consequences?
 
 My analysis can be found in [project2.Rmd](project2.Rmd). The final product has been published
-to RPubs and can be foudn [here](https://rpubs.com/amr6d5/642356). 
+to RPubs and can be found [here](http://rpubs.com/amr6d5/642356). 
